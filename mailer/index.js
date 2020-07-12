@@ -17,4 +17,10 @@ function sendMail(to, subject, text) {
     })
 }
 
+function sendVerificationMail(email) {
+    if(!email) throw Error('Verification email cannot be sent. Error: No email received')
+    sendMail(email, 'Verify Your Email', 'TODO LATER')
+}
+
 exports.sendMail = sendMail
+exports.sendVerificationMail = sendVerificationMail
