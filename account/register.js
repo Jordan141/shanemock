@@ -1,5 +1,4 @@
 const Utilities = require('../utils')
-const mailer = require('../mailer')
 const SALT_SIZE = 80
 
 function createRegisterController(UserModel = require('../db').user) {
@@ -17,7 +16,7 @@ function createRegisterController(UserModel = require('../db').user) {
         const userInstance = new UserModel(userData)
         userInstance.save()
         .then(() => {
-            mailer.sendVerificationMail(userData.email)
+            
             res.send(200)
         })
         .catch(err => {

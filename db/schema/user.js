@@ -1,5 +1,6 @@
 const Schema = require('mongoose').Schema
 const uniqueValidator = require('mongoose-unique-validator')
+const dbConnection = require('../dbConnectionProvider').getDbConnection()
 
 const userSchema = new Schema({
     username: {
