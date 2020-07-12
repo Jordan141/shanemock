@@ -1,11 +1,10 @@
-const mongoose = require('mongoose')
-const dbUser = process.env.DB_USER
-const dbPassword = process.env.DB_PASSWORD
+const dbConnectionProvider = require('./dbConnectionProvider')
+const connectToDb = require('./connectToDb')
 
-mongoose.connect(`mongodb://${dbUser}:${dbPassword}@ds052649.mlab.com:52649/shanemock`, {useNewUrlParser: true})
 
-const db = mongoose.connection
-db.on('error', console.error.bind('console', 'connection error:'))
+const dbConnection = connectToDb()
+dbConnectionProvider.setDbConnection(dbConnection)
 
 
 exports.user = require('./users')
+exports.connection = dbConnectionProvider

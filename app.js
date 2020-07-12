@@ -1,11 +1,12 @@
 const express = require('express')
+require('dotenv').config()
 const app = express()
-const router = express.Router()
+//const router = express.Router()
 const PORT = process.env.PORT || 3000
 
 const passport = require('passport')
 const {Strategy} = require('passport-local')
-const db = null
+const db = require('./db')
 
 passport.use(new Strategy((username, password, cb) => {
     db.users.findByUsername(username, (err, user) => {
