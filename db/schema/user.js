@@ -18,6 +18,14 @@ const userSchema = new Schema({
     },
     salt: {
         type: String
+    },
+    verified: {
+        type: Boolean,
+        default: 0,
+        required
+    },
+    verifiedOn: {
+        type: String
     }
 })
 
