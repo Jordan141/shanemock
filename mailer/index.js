@@ -18,6 +18,7 @@ function sendMail(to, subject, text) {
 }
 
 function sendVerificationMail(email, token) {
+    console.log('Local Strategy has been deprecated, use the Google Auth path for now - Jordan')
     if(!email) throw Error('Verification email cannot be sent. Error: No email received')
     const emailText = `Your verification token is ${token}`
     sendMail(email, 'Verify Your Email', emailText)

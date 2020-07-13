@@ -1,36 +1,12 @@
 const express = require('express')
 require('dotenv').config()
 const app = express()
-//const router = express.Router()
 const PORT = process.env.PORT || 3000
-
-const passport = require('passport')
-const {Strategy} = require('passport-local')
-const db = require('./db')
-
-passport.use(new Strategy((username, password, cb) => {
-    db.users.findByUsername(username, (err, user) => {
-        if(err) { return cb(err)}
-        if(!user) {return cb(null, false)}
-        if(user.password != password) {return cb(null, false)}
-
-        return cb(null, user)
-    })
-}))
-
-passport.serializeUser((user, cb) => {
-    cb(null, user.id)
-})
-
-passport.deserializeUser((id, cb) => {
-    db.users.findById(id, (err, user) => {
-        if(err) {return cb(err)}
-        cb(null, user)
-    })
-})
+const passport = require('./passport')
+const cookieSession = require("cookie-session")
 
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(cookieSession({maxAge: 24*60*60*1000, keys: [process.env.SECRET_COOKIE]}))
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('public'))
@@ -39,19 +15,11 @@ app.get('/', (req, res) => {
     res.render('home', {user: req.user})
 })
 
-app.get('/login', (req, res) => {
-    res.render('login')
-})
-
-app.post('/login', passport.authenticate('local', {failureRedirect: '/login'}), (req, res) => {
-    res.redirect('/')
-})
-
+app.get('/auth/google', passport.authenticate('google', {scope: ['profile, email']}))
 app.get('/logout', (req, res) => {
     req.logout()
-    res.redirect('/')
+    res.send(req.user)
 })
-
 //app.use('/', router)
 
 app.listen(PORT)

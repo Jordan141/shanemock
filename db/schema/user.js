@@ -3,30 +3,15 @@ const uniqueValidator = require('mongoose-unique-validator')
 const dbConnection = require('../dbConnectionProvider').getDbConnection()
 
 const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
     email: {
         type: String,
         required: true,
         unique: true
     },
-    password: {
+    googleId: {
         type: String,
-        required: true
-    },
-    salt: {
-        type: String
-    },
-    verified: {
-        type: Boolean,
-        default: 0,
-        required
-    },
-    verifiedOn: {
-        type: String
+        required: true,
+        unique: true
     }
 })
 
