@@ -2,8 +2,9 @@ const express = require('express')
 require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT || 3000
-const passport = require('./passport')
 const cookieSession = require("cookie-session")
+const db = require('./db') //Init Database Connection
+const passport = require('./passport')
 
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(cookieSession({maxAge: 24*60*60*1000, keys: [process.env.SECRET_COOKIE]}))
