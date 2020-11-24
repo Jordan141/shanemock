@@ -1,11 +1,9 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const User = require('../db/schema/user')
-const local = require('./strategies/login')
-const signup = require('./strategies/signup')
+const local = require('./strategies/localLogin')
 
 passport.use(local)
-passport.use(signup)
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,

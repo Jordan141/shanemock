@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.render('home', {user: req.user})
 })
 
-app.post('/signup', passport.authenticate('signup'), function(req, res) {
+app.post('/signup', passport.authenticate('local'), function(req, res) {
     //signup ok
     res.send('signup ok')
 })

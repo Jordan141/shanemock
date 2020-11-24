@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy
-const LocalUserModel = require('./../../db/schema/localUser')
+const LocalUserModel = require('../../db/schema/localUser')
 
 const local = new LocalStrategy(
     function(username, password, done) {
