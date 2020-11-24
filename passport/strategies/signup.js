@@ -1,9 +1,9 @@
-const passport = require('passport')
-const strategy = require('passport-local').strategy
-const users = require('./db/schema/user')
+const LocalStrategy = require('passport-local').Strategy
+const users = require('./../../db/schema/user')
 
-const signup = new strategy(
+const signup = new LocalStrategy(
     function(username, password, done) {
+        console.log('OK')
         users.findOne({username : username}, function (err, user) {
             if (err) { return done(err) }
             if (!user) { return done(null, false, { message: 'Incorrect username.' }); }
@@ -12,3 +12,5 @@ const signup = new strategy(
         })
     }
 )
+
+module.exports = signup
