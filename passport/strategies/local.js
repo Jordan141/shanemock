@@ -1,6 +1,6 @@
 const passport = require('passport')
 const strategy = require('passport-local').strategy
-const users = require('./db/schema/user')
+const users = require('../../db/schema/user')
 
 const local = new strategy(
     function(username, password, done) {
