@@ -1,37 +1,23 @@
-const express = require('express')
 require('dotenv').config()
+const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
+
 const cookieSession = require("cookie-session")
 const db = require('./db') //Init Database Connection
 const passport = require('./passport')
+const router = require('./routes/local')
+
+const Users = require('./db/schema/localUser')
 
 app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('body-parser').json());
 app.use(cookieSession({maxAge: 24*60*60*1000, keys: [process.env.SECRET_COOKIE]}))
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static('public'))
+app.use('/', router)
 
-app.get('/', (req, res) => {
-    res.render('home', {user: req.user})
-})
-
-app.post('/signup', passport.authenticate('local'), function(req, res) {
-    //signup ok
-    res.send('signup ok')
-})
-
-app.post('/login', passport.authenticate('local'), function(req, res) {
-    //auth ok
-    res.send('login ok')
-})
-
-app.get('/auth/google', passport.authenticate('google', {scope: ['profile, email']}))
-
-app.get('/logout', (req, res) => {
-    req.logout()
-    res.send(req.user)
-})
+//app.get('/auth/google', passport.authenticate('google', {scope: ['profile, email']}))
 //app.use('/', router)
 
 app.listen(PORT)

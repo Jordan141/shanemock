@@ -18,6 +18,6 @@ const localUserSchema = Schema({
     }
 })
 
-const LocalUserModel = model('localUsers', localUserSchema)
+const Users = model('localUsers', localUserSchema)
 
-module.exports = LocalUserModel
+module.exports = Users
