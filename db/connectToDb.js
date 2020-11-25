@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
-const dbUser = process.env.DB_USER
-const dbPassword = process.env.DB_PASS
 
-const URL = `mongodb://localhost:27017/shanemock`
+const URL = process.env.DB_URL
 
 module.exports = () => {
     const db = mongoose.createConnection(URL, { useNewUrlParser: true, useUnifiedTopology: true })
