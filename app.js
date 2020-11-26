@@ -14,7 +14,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', router)
 
-//app.get('/auth/google', passport.authenticate('google', {scope: ['profile, email']}))
+app.get('/auth/google', passport.authenticate('google', {scope: ['profile, email']}))
 //app.use('/', router)
 
 app.listen(process.env.PORT)
