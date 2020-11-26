@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose')
+const Schema = require('mongoose').Schema
+const conn = require('./../dbConnectionProvider')
 const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = Schema({
@@ -15,6 +16,6 @@ const userSchema = Schema({
 })
 
 userSchema.plugin(uniqueValidator, {message: 'DUPLICATE KEY ERROR'})
-const UserModel = model('users', userSchema)
+const UserModel = conn.getDbConnection().model('users', userSchema)
 
 module.exports = UserModel

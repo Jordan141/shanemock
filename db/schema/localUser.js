@@ -1,4 +1,5 @@
-const { Schema, model } = require('mongoose')
+const Schema = require('mongoose').Schema
+const conn = require('./../dbConnectionProvider')
 //TODO UNIQUE VALIDATOR
 
 const localUserSchema = Schema({
@@ -18,6 +19,6 @@ const localUserSchema = Schema({
     }
 })
 
-const Users = model('localUsers', localUserSchema)
+const User = conn.getDbConnection().model('localUsers', localUserSchema)
 
-module.exports = Users
+module.exports = User
