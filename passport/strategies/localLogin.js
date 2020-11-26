@@ -7,13 +7,11 @@ const local = new LocalStrategy(
         Users.findOne({username : username}, function (err, user) {
             if (err) return done(err)
             if (!user) return done(null, false, { message: 'Incorrect username.' });
-            console.log(verifyPassword(username, password))
-            if (!verifyPassword(username, password)) return done(null, false, { message: 'Incorrect password.' })
-            return done(null, user)
+            verifyPassword(username, password).then(function(result) {
+                if(result) return done(null, user); else done(null, false, { message: 'Incorrect password.' })
+            })
         })
     }
 )
-
-// ASYNC
 
 module.exports = local
