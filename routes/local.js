@@ -22,7 +22,8 @@ router.post('/signup', function(req, res) {
     const newUser = {
         username: req.body.username,
         email: req.body.email,
-        password: password
+        password,
+        salt
     }
 
     User.create(newUser, function(err, newUser) {
@@ -34,7 +35,7 @@ router.post('/signup', function(req, res) {
 })
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log('login')
+    console.log('login ok')
     res.send('login')
 })
 
