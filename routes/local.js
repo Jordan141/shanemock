@@ -12,8 +12,8 @@ router.get('/', function(req, res) {
 
 router.post('/signup', function(req, res) {
     if (!verifyUsername(req.body.username)) return res.sendStatus(400)
-    if (!verifyUsername(req.body.email)) return res.sendStatus(400)
-    if (!verifyUsername(req.body.password)) return res.sendStatus(400)
+    if (!verifyEmail(req.body.email)) return res.sendStatus(400)
+    if (!verifyPassword(req.body.password)) return res.sendStatus(400)
 
     const salt = Utilities.generateSalt(80)
     const password = Utilities.createSaltedHash(salt, req.body.password)
