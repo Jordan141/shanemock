@@ -20,18 +20,18 @@ function prepareToken(email, VerifyModel = require('../db/schema/verify')) {
 function verifyUsername(username) {
     if (username === undefined || username === null) return false
     const alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqyz0123456789"
-    username.foreach(function (value) {
-        if (!alphanumeric.contains(value)) return false
-    })
+    for (let i = 0; i < username.length; i++) {
+        if (!alphanumeric.includes(username.charAt(i))) return false
+    }
     return true
 }
 
 function verifyEmail(email) {
     if (email === undefined || email === null) return false
-    if (!email.contains('@') || !email.contains('.')) return false
-    if (email.indexOf('@') > email.indexOf('.')) return false
-    if (!email.split('@')[0] > 0 || !email.split('@')[1] > 0) return false
-    if (!email.split('.')[0] > 0 || !email.split('.')[1] > 0) return false
+    if (!email.includes('@') || !email.includes('.')) return false
+    // if (email.indexOf('@') > email.indexOf('.')) return false
+    // if (!email.split('@')[0] > 0 || !email.split('@')[1] > 0) return false
+    // if (!email.split('.')[0] > 0 || !email.split('.')[1] > 0) return false
     return true
 }
 
@@ -40,4 +40,4 @@ function verifyPassword(password) {
     return true
 }
 
-module.exports = { prepareToken, verifyUsername, verifyEmail, verifyPassword }
+module.exports = { prepareToken, verifyEmail, verifyUsername, verifyPassword }
