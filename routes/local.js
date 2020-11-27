@@ -5,12 +5,11 @@ const User = require('./../db/schema/localUser')
 const Utilities = require('../utils')
 const { verifyUsername, verifyEmail, verifyPassword } = require('./../account/verification')
 
-router.get('/', function(req, res) {
-    console.log('main')
+router.get('/', (req, res) => {
     res.send('main')
 })
 
-router.post('/signup', function(req, res) {
+router.post('/signup', (req, res) => {
     if (!verifyUsername(req.body.username)) return res.sendStatus(400)
     if (!verifyEmail(req.body.email)) return res.sendStatus(400)
     if (!verifyPassword(req.body.password)) return res.sendStatus(400)
@@ -25,15 +24,13 @@ router.post('/signup', function(req, res) {
         salt
     }
 
-    User.create(newUser, function(err, newUser) {
+    User.create(newUser, (err, newUser) => {
         if (err) return res.sendStatus(400)
-        console.log(newUser)
         res.send('signup')
     })
 })
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log('login ok')
+router.post('/login', passport.authenticate('local'), (req, res) => {
     res.send('login')
 })
 
