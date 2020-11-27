@@ -8,7 +8,8 @@ const local = new LocalStrategy(
             if (err) return done(err)
             if (!user) return done(null, false, { message: 'Incorrect username.' });
             verifyPassword(username, password).then((result) => {
-                if(result) return done(null, user); else done(null, false, { message: 'Incorrect password.' })
+                if(result) return done(null, user)
+                done(null, false, { message: 'Incorrect password.' })
             })
         })
     }
