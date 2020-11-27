@@ -16,6 +16,6 @@ const userSchema = Schema({
 })
 
 userSchema.plugin(uniqueValidator, {message: 'DUPLICATE KEY ERROR'})
-const UserModel = conn.getDbConnection().model('users', userSchema)
+const User = conn.getDbConnection().model('uUsers', userSchema)
 
-module.exports = UserModel
+module.exports = User
