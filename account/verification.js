@@ -1,5 +1,6 @@
 const crypto = require('crypto')
 const mailer = require('../mailer')
+const Utilities = require('../utils')
 
 function prepareToken(email, VerifyModel = require('../db/schema/verify')) {
     const token = crypto.randomBytes(64).toString('hex')
@@ -18,25 +19,19 @@ function prepareToken(email, VerifyModel = require('../db/schema/verify')) {
 }
 
 function verifyUsername(username) {
-    if (username === undefined || username === null) return false
-    const alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqyz0123456789"
-    for (let i = 0; i < username.length; i++) {
-        if (!alphanumeric.includes(username.charAt(i))) return false
-    }
+    if (!username) return false
+    if (!Utilities.verifyCharset(Utilities.alphanumericCharset, username)) return false
     return true
 }
 
 function verifyEmail(email) {
-    if (email === undefined || email === null) return false
-    if (!email.includes('@') || !email.includes('.')) return false
-    // if (email.indexOf('@') > email.indexOf('.')) return false
-    // if (!email.split('@')[0] > 0 || !email.split('@')[1] > 0) return false
-    // if (!email.split('.')[0] > 0 || !email.split('.')[1] > 0) return false
+    if (email) return false
+    if (!Utilities.verifyCharset(Utilities.alphanumericCharset + '.@', email)) return false
     return true
 }
 
 function verifyPassword(password) {
-    if (password === undefined || password === null) return false
+    if (password) return false
     return true
 }
 

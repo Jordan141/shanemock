@@ -1,6 +1,15 @@
 const crypto = require('crypto')
 
 class Utilities {
+	static alphanumericCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqyz0123456789"
+
+	static verifyCharset(charset, text) {
+		[...text].forEach((value) => {
+			if (!charset.includes(value)) return false
+		})
+		return true
+	}
+
     static generateSalt (size) {
 		if (!size) return null
 		return crypto.randomBytes(size).toString('base64')
