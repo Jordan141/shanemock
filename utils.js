@@ -4,9 +4,7 @@ class Utilities {
 	static alphanumericCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqyz0123456789"
 
 	static verifyCharset(charset, text) {
-		[...text].forEach((value) => {
-			if (!charset.includes(value)) return false
-		})
+		if([...text].some((element) => !charset.includes(element))) return false
 		return true
 	}
 

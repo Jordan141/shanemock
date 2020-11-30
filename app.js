@@ -17,5 +17,4 @@ app.use(passport.session());
 app.use('/auth', oauthRoutes)
 app.use('/', localRoutes)
 
-
 app.listen(process.env.PORT)
