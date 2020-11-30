@@ -23,6 +23,6 @@ const localUserSchema = Schema({
     }
 })
 
-const User = conn.getDbConnection().model('localUsers', localUserSchema)
+const localUser = conn.getDbConnection().model('localUsers', localUserSchema)
 
-module.exports = User
+module.exports = localUser

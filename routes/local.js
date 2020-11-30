@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('./../passport')
 const router = express.Router()
-const User = require('./../db/schema/localUser')
+const localUser = require('./../db/schema/localUser')
 const Utilities = require('../utils')
 const { verifyUsername, verifyEmail, verifyPassword } = require('./../account/verification')
 
@@ -24,7 +24,7 @@ router.post('/signup', (req, res) => {
         salt
     }
 
-    User.create(newUser, (err, newUser) => {
+    localUser.create(newUser, (err, newUser) => {
         if (err) return res.sendStatus(400)
         res.send('signup')
     })
