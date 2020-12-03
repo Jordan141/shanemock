@@ -7,8 +7,8 @@ function verifyPassword(username, password) {
         localUser.findOne({username}).then((user) => {
             if (Utilities.createSaltedHash(user.salt, password) == user.password) return resolve(user)
             reject()
-        }).catch(() => {
-            return reject()
+        }).catch((err) => {
+            return reject(err)
         })
     })
 }
