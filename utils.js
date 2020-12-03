@@ -2,9 +2,11 @@ const crypto = require('crypto')
 
 class Utilities {
 	static alphanumericCharset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwqyz0123456789"
+	static hashLength = 80
 
 	static verifyCharset(charset, text) {
-		if([...text].some((element) => !charset.includes(element))) return false
+		const undesirableChars = [...text].some((element) => !charset.includes(element))
+		if(undesirableChars) return false
 		return true
 	}
 

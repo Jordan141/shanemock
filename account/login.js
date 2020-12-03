@@ -4,13 +4,11 @@ const localUser = require('./../db/schema/localUser')
 
 function verifyPassword(username, password) {
     return new Promise((resolve, reject) => {
-        localUser.findOne({username}, 'password salt')
-        .then((user) => {
-            if (Utilities.createSaltedHash(user.salt, password) == user.password) return resolve(true)
-            reject(false)
-        })
-        .catch((err) => {
-            return reject(false)
+        localUser.findOne({username}).then((user) => {
+            if (Utilities.createSaltedHash(user.salt, password) == user.password) return resolve(user)
+            reject()
+        }).catch(() => {
+            return reject()
         })
     })
 }
