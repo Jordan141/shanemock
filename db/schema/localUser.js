@@ -23,7 +23,7 @@ const localUserSchema = Schema({
     }
 })
 
-localUserSchema.plugin(uniqueValidator, {message: 'DUPLICATE KEY ERROR'})
+localUserSchema.plugin(uniqueValidator, {message: 'name is already taken'})
 const localUser = conn.getDbConnection().model('localUsers', localUserSchema)
 
 module.exports = localUser
