@@ -22,7 +22,7 @@ router.post('/signup', (req, res) => {
         salt
     }
 
-    localUser.create(newUser, (err, newUser) => {
+    localUser.create(newUser, (err) => {
         if (err) return res.sendStatus(400)
         res.send('signup')
     })

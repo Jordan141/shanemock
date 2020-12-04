@@ -20,7 +20,6 @@ function prepareToken(email, VerifyModel = require('../db/schema/verify')) {
 
 function verifyUsername(username) {
     if (!username) return false
-    console.log(Utilities.verifyCharset(Utilities.alphanumericCharset, username))
     return Utilities.verifyCharset(Utilities.alphanumericCharset, username)
 }
 

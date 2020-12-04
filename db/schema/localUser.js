@@ -1,6 +1,6 @@
 const Schema = require('mongoose').Schema
 const conn = require('./../dbConnectionProvider')
-//TODO UNIQUE VALIDATOR
+const uniqueValidator = require('mongoose-unique-validator')
 
 const localUserSchema = Schema({
     username: {
@@ -23,6 +23,7 @@ const localUserSchema = Schema({
     }
 })
 
+localUserSchema.plugin(uniqueValidator, {message: 'DUPLICATE KEY ERROR'})
 const localUser = conn.getDbConnection().model('localUsers', localUserSchema)
 
 module.exports = localUser
