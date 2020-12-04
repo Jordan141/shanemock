@@ -6,7 +6,7 @@ const verifyPassword = require('./../../account/login')
 const local = new LocalStrategy((username, password, done) => {
     localUser.findOne({username})
     .then(user => verifyPassword(password, user))
-    .then(result => { if (result) return done(null, result); return done(null, false) })
+    .then(result => result ? done(null, result) : done(null, false))
     .catch(err => { return done(err) })
 })
 
