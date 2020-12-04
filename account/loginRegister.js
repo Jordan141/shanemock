@@ -3,7 +3,7 @@ module.exports = (profile, done, User = require('../db/schema/user')) => {
         if(currentUser){
             done(null, currentUser)
         } else {
-            new User({googleId: profile.id })
+            new User({googleId: profile.id, email: profile._json.email})
             .save()
             .then((newUser) => {
                 done(null, newUser)

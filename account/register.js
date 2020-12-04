@@ -16,7 +16,6 @@ function createRegisterController(UserModel = require('../db').user) {
         const userInstance = new UserModel(userData)
         userInstance.save()
         .then(() => {
-            
             res.send(200)
         })
         .catch(err => {

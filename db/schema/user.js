@@ -1,8 +1,8 @@
 const Schema = require('mongoose').Schema
+const conn = require('./../dbConnectionProvider')
 const uniqueValidator = require('mongoose-unique-validator')
-const dbConnection = require('../dbConnectionProvider').getDbConnection()
 
-const userSchema = new Schema({
+const userSchema = Schema({
     email: {
         type: String,
         required: true,
@@ -16,6 +16,6 @@ const userSchema = new Schema({
 })
 
 userSchema.plugin(uniqueValidator, {message: 'DUPLICATE KEY ERROR'})
-const UserModel = dbConnection.model('users', userSchema)
+const User = conn.getDbConnection().model('users', userSchema)
 
-module.exports = UserModel
+module.exports = User

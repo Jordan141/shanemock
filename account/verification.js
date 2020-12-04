@@ -1,5 +1,6 @@
 const crypto = require('crypto')
 const mailer = require('../mailer')
+const Utilities = require('../utils')
 
 function prepareToken(email, VerifyModel = require('../db/schema/verify')) {
     const token = crypto.randomBytes(64).toString('hex')
@@ -17,4 +18,18 @@ function prepareToken(email, VerifyModel = require('../db/schema/verify')) {
     .catch(console.log)
 }
 
-module.exports = prepareToken
+function verifyUsername(username) {
+    if (!username) return false
+    return Utilities.verifyCharset(Utilities.alphanumericCharset, username)
+}
+
+function verifyEmail(email) {
+    if (!email) return false
+    return Utilities.verifyCharset(Utilities.alphanumericCharset + '.@', email)
+}
+
+function verifyPassword(password) {
+    return !!password
+}
+
+module.exports = { prepareToken, verifyEmail, verifyUsername, verifyPassword }
