@@ -20,19 +20,16 @@ function prepareToken(email, VerifyModel = require('../db/schema/verify')) {
 
 function verifyUsername(username) {
     if (!username) return false
-    if (Utilities.verifyCharset(Utilities.alphanumericCharset, username)) return true
-    return false
+    return Utilities.verifyCharset(Utilities.alphanumericCharset, username)
 }
 
 function verifyEmail(email) {
     if (!email) return false
-    if (Utilities.verifyCharset(Utilities.alphanumericCharset + '.@', email)) return true
-    return false
+    return Utilities.verifyCharset(Utilities.alphanumericCharset + '.@', email)
 }
 
 function verifyPassword(password) {
-    if (!password) return false
-    return true
+    return !!password
 }
 
 module.exports = { prepareToken, verifyEmail, verifyUsername, verifyPassword }

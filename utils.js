@@ -6,7 +6,7 @@ class Utilities {
 
 	static verifyCharset(charset, text) {
 		const hasUndesirableChars = [...text].some((element) => !charset.includes(element))
-		return !hasUndesirableChars
+		return hasUndesirableChars
 	}
 
     static generateSalt (size) {
