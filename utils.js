@@ -5,9 +5,8 @@ class Utilities {
 	static hashLength = 80
 
 	static verifyCharset(charset, text) {
-		const undesirableChars = [...text].some((element) => !charset.includes(element))
-		if(undesirableChars) return false
-		return true
+		const hasUndesirableChars = [...text].some((element) => !charset.includes(element))
+		return !hasUndesirableChars
 	}
 
     static generateSalt (size) {
